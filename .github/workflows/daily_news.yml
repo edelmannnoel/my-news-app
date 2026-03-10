@@ -1,27 +1,44 @@
 name: News Update Service
+
 on:
   schedule:
-    - cron: '0 5 * * *'  # 05:00 UTC ist ca. 06:00/07:00 deutsche Zeit (Morgens)
-    - cron: '0 11 * * *' # 11:00 UTC ist ca. 12:00/13:00 deutsche Zeit (Mittags)
-    - cron: '0 17 * * *' # 17:00 UTC ist ca. 18:00/19:00 deutsche Zeit (Abends)
-  workflow_dispatch:      # DAS ERLAUBT DAS MANUELLE STARTEN ÜBER GITHUB
+    - cron: '0 5 * * *'  # Morgens (ca. 06:00/07:00 DE)
+    - cron: '0 11 * * *' # Mittags (ca. 12:00/13:00 DE)
+    - cron: '0 17 * * *' # Abends (ca. 18:00/19:00 DE)
+  workflow_dispatch:      # Ermöglicht manuelles Starten über den "Run workflow" Button
+
 jobs:
   build:
     runs-on: ubuntu-latest
+    
+    # Berechtigungen, damit der Bot die briefing.json Datei ändern darf
+    permissions:
+      contents: write
+
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up Python
-        uses: actions/setup-python@v2
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
       - name: Install dependencies
-        run: pip install feedparser google-generativeai
-      - name: Fetch News
+        run: |
+          python -m pip install --upgrade pip
+          pip install feedparser google-genai
+
+      - name: Fetch News and Generate Briefing
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python fetch_news.py
+
       - name: Commit and push changes
         run: |
-          git config --global user.name 'DailyBot'
+          git config --global user.name 'NewsBot'
           git config --global user.email 'bot@github.com'
           git add briefing.json
-          git commit -m "Update News" || exit 0
+          # Commit nur, wenn sich die Datei tatsächlich geändert hat
+          git commit -m "Update News Briefing $(date +'%Y-%m-%d %H:%M')" || exit 0
           git push
