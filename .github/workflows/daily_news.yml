@@ -1,0 +1,25 @@
+name: Daily News Update
+on:
+  schedule:
+    - cron: '0 5 * * *' # Täglich um 5 Uhr morgens
+  workflow_dispatch: # Erlaubt manuelles Starten
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+      - name: Install dependencies
+        run: pip install feedparser google-generativeai
+      - name: Fetch News
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python fetch_news.py
+      - name: Commit and push changes
+        run: |
+          git config --global user.name 'DailyBot'
+          git config --global user.email 'bot@github.com'
+          git add briefing.json
+          git commit -m "Update News" || exit 0
+          git push
