@@ -1,8 +1,10 @@
-name: Daily News Update
+name: News Update Service
 on:
   schedule:
-    - cron: '0 5 * * *' # Täglich um 5 Uhr morgens
-  workflow_dispatch: # Erlaubt manuelles Starten
+    - cron: '0 5 * * *'  # 05:00 UTC ist ca. 06:00/07:00 deutsche Zeit (Morgens)
+    - cron: '0 11 * * *' # 11:00 UTC ist ca. 12:00/13:00 deutsche Zeit (Mittags)
+    - cron: '0 17 * * *' # 17:00 UTC ist ca. 18:00/19:00 deutsche Zeit (Abends)
+  workflow_dispatch:      # DAS ERLAUBT DAS MANUELLE STARTEN ÜBER GITHUB
 jobs:
   build:
     runs-on: ubuntu-latest
