@@ -31,6 +31,7 @@ def get_briefing():
     3. 'Was heute wichtig wird': Ein Ausblick.
     
     Stil: Professionell, wie 'Guten Morgen von Reuters', aber mit modernerem Touch. Nutze Emojis dezent.
+    "Schreibe im Stil von 'The Economist'. Nutze klare, starke Verben. Beginne mit einem Abschnitt 'DAS WICHTIGSTE ZUERST' in Fettdruck. Trenne Themen durch horizontale Linien (---). Vermeide Phrasen wie 'Hier ist dein Überblick', komm direkt zum Punkt."
     """
 
     model = genai.GenerativeModel('gemini-1.5-flash')
