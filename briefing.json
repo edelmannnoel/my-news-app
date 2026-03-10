@@ -1,4 +1,4 @@
 {
-  "last_update": "10. March, 12:20 Uhr",
-  "content": "Keine News-Quellen erreichbar."
+  "last_update": "10. March, 12:25 Uhr",
+  "content": "KI-Service derzeit nicht erreichbar. (Error: 400 INVALID_ARGUMENT. {'error': {'code': 400, 'message': 'Invalid value at \\'safety_settings[0].category\\' (type.googleapis.com/google.ai.generativelanguage.v1.HarmCategory), \"HATE_SPEECH\"\\nInvalid value at \\'safety_settings[1].category\\' (type.googleapis.com/google.ai.generativelanguage.v1.HarmCategory), \"HARASSMENT\"\\nInvalid value at \\'safety_settings[2].category\\' (type.googleapis.com/google.ai.generativelanguage.v1.HarmCategory), \"DANGEROUS_CONTENT\"', 'status': 'INVALID_ARGUMENT', 'details': [{'@type': 'type.googleapis.com/google.rpc.BadRequest', 'fieldViolations': [{'field': 'safety_settings[0].category', 'description': 'Invalid value at \\'safety_settings[0].category\\' (type.googleapis.com/google.ai.generativelanguage.v1.HarmCategory), \"HATE_SPEECH\"'}, {'field': 'safety_settings[1].category', 'description': 'Invalid value at \\'safety_settings[1].category\\' (type.googleapis.com/google.ai.generativelanguage.v1.HarmCategory), \"HARASSMENT\"'}, {'field': 'safety_settings[2].category', 'description': 'Invalid value at \\'safety_settings[2].category\\' (type.googleapis.com/google.ai.generativelanguage.v1.HarmCategory), \"DANGEROUS_CONTENT\"'}]}]}})"
 }
